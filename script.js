@@ -78,3 +78,29 @@ window.addEventListener("click", (e) => {
   }
 
 });
+
+/* Floating Hearts */
+
+const heartsContainer = document.querySelector('.hearts');
+
+for(let i=0;i<40;i++){
+
+  const heart = document.createElement('div');
+
+  heart.classList.add('heart');
+
+  heart.innerHTML = '💖';
+
+  heart.style.left = Math.random()*100 + 'vw';
+
+  heart.style.animationDuration =
+    (6 + Math.random()*10) + 's';
+
+  heart.style.fontSize =
+    (15 + Math.random()*25) + 'px';
+
+  heart.style.animationDelay =
+    Math.random()*10 + 's';
+
+  heartsContainer.appendChild(heart);
+}
