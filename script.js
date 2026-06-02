@@ -114,3 +114,77 @@ for(let i=0;i<40;i++){
 
   heartsContainer.appendChild(heart);
 }
+
+/* MUSIC PLAYER */
+
+const musicBtn = document.getElementById('musicBtn');
+
+const bgMusic = document.getElementById('bgMusic');
+
+let isPlaying = false;
+
+musicBtn.addEventListener('click',()=>{
+
+  if(!isPlaying){
+
+    bgMusic.play();
+
+    musicBtn.innerHTML='💖';
+
+    isPlaying=true;
+
+  }else{
+
+    bgMusic.pause();
+
+    musicBtn.innerHTML='🎵';
+
+    isPlaying=false;
+
+  }
+
+});
+
+/* CURSOR HEART TRAIL */
+
+document.addEventListener('mousemove',(e)=>{
+
+  const heart=document.createElement('div');
+
+  heart.classList.add('cursor-heart');
+
+  heart.innerHTML='💖';
+
+  heart.style.left=e.clientX+'px';
+
+  heart.style.top=e.clientY+'px';
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },1000);
+
+});
+
+/* SHOOTING STARS */
+
+function createShootingStar(){
+
+  const star=document.createElement('div');
+
+  star.classList.add('shooting-star');
+
+  star.style.left=Math.random()*window.innerWidth+'px';
+
+  star.style.top=Math.random()*300+'px';
+
+  document.body.appendChild(star);
+
+  setTimeout(()=>{
+    star.remove();
+  },2000);
+
+}
+
+setInterval(createShootingStar,4000);
