@@ -1,69 +1,244 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f0f1a;
-  color: white;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-h1 {
-  margin-top: 30px;
-  font-size: 4rem;
+body{
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(135deg,#07071c,#120c33,#1d1147);
+  min-height:100vh;
+  overflow-x:hidden;
+  color:white;
+  text-align:center;
+  position:relative;
 }
 
-.subtitle {
-  color: pink;
-  margin-bottom: 30px;
+/* Animated Stars */
+
+body::before{
+  content:'';
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(pink 1px, transparent 1px),
+    radial-gradient(#ffffffaa 1px, transparent 1px);
+  background-size:120px 120px;
+  animation:starsMove 120s linear infinite;
+  opacity:0.35;
+  z-index:-3;
 }
 
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-  padding: 20px;
+@keyframes starsMove{
+  from{
+    transform:translateY(0);
+  }
+  to{
+    transform:translateY(-500px);
+  }
 }
 
-.day-card {
-  background: rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 20px;
-  cursor: pointer;
+/* Floating Hearts */
+
+.hearts{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:-1;
 }
 
-.locked {
-  opacity: 0.5;
+.heart{
+  position:absolute;
+  color:#ff4d88;
+  font-size:20px;
+  animation:floatHeart linear infinite;
+  opacity:0.7;
 }
 
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
+@keyframes floatHeart{
+  0%{
+    transform:translateY(100vh) scale(0.5);
+    opacity:0;
+  }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  20%{
+    opacity:0.8;
+  }
+
+  100%{
+    transform:translateY(-120vh) scale(1.4);
+    opacity:0;
+  }
 }
 
-.hidden {
-  display: none;
+/* Heading */
+
+h1{
+  margin-top:40px;
+  font-size:5rem;
+  font-family:'Dancing Script',cursive;
+  color:#fff;
+  text-shadow:0 0 20px #ff4da6;
 }
 
-.popup-content {
-  background: #1e1e2f;
-  padding: 30px;
-  border-radius: 20px;
-  width: 80%;
-  max-width: 500px;
-  position: relative;
+.subtitle{
+  margin-top:10px;
+  margin-bottom:40px;
+  color:#ffd1e8;
+  font-size:1.2rem;
 }
 
-#closeBtn {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  font-size: 30px;
-  cursor: pointer;
+/* Calendar */
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:25px;
+  padding:40px;
+}
+
+/* Cards */
+
+.day-card{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:25px;
+  padding:25px;
+  backdrop-filter:blur(12px);
+  box-shadow:
+    0 0 20px rgba(255,105,180,0.25);
+  transition:0.4s;
+  cursor:pointer;
+}
+
+.day-card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:
+    0 0 35px rgba(255,105,180,0.5);
+}
+
+.day-card h3{
+  font-size:2rem;
+  color:#ffb3d9;
+  margin-bottom:10px;
+  font-family:'Dancing Script',cursive;
+}
+
+.day-card p{
+  margin-top:10px;
+  color:#ffe3f1;
+}
+
+.locked{
+  opacity:0.5;
+}
+
+/* Popup */
+
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.75);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+  z-index:100;
+}
+
+.hidden{
+  display:none;
+}
+
+.popup-content{
+  background:rgba(15,15,40,0.9);
+  border:1px solid rgba(255,255,255,0.15);
+
+  backdrop-filter:blur(20px);
+
+  width:100%;
+  max-width:550px;
+
+  padding:40px;
+  border-radius:30px;
+
+  box-shadow:
+    0 0 40px rgba(255,105,180,0.45);
+
+  position:relative;
+
+  animation:popupShow 0.4s ease;
+}
+
+@keyframes popupShow{
+  from{
+    transform:scale(0.7);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+#popupTitle{
+  font-size:3rem;
+  color:#ff9ec9;
+  margin-bottom:20px;
+  font-family:'Dancing Script',cursive;
+}
+
+#popupMessage{
+  line-height:1.8;
+  color:#fff0f7;
+  font-size:1.1rem;
+}
+
+#closeBtn{
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:2rem;
+  cursor:pointer;
+  color:#ffb3d9;
+}
+
+/* Footer */
+
+.footer{
+  margin:40px 0;
+  color:#ffd6ea;
+  font-size:1rem;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+  h1{
+    font-size:3.5rem;
+  }
+
+  .calendar{
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    padding:20px;
+  }
+
+  .day-card{
+    padding:20px;
+  }
+
 }
