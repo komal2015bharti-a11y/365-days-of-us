@@ -4,7 +4,7 @@ const popupTitle = document.getElementById("popupTitle");
 const popupMessage = document.getElementById("popupMessage");
 const closeBtn = document.getElementById("closeBtn");
 
-fetch("messages.json")
+fetch("./messages.json")
   .then(response => response.json())
   .then(data => {
 
@@ -30,12 +30,24 @@ fetch("messages.json")
         });
 
       } else {
+
         card.classList.add("locked");
         card.innerHTML += `<p>🔒 Locked</p>`;
       }
 
       calendar.appendChild(card);
+
     });
+
+  })
+  .catch(error => {
+    console.error("Error loading messages:", error);
+
+    calendar.innerHTML = `
+      <p style="color:white;">
+        Failed to load messages 💔
+      </p>
+    `;
   });
 
 closeBtn.addEventListener("click", () => {
