@@ -1,1 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
 
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "messages"
+    label: "Messages"
+    files:
+      - file: "messages.json"
+        label: "Daily Messages"
+        name: "daily_messages"
+
+        fields:
+          - label: "Messages"
+            name: "messages"
+            widget: "list"
+
+            fields:
+              - {label: "Date", name: "date", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Message", name: "message", widget: "text"}
