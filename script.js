@@ -25,10 +25,20 @@ fetch("./messages.json")
       const unlockDate = new Date(date);
 
       card.innerHTML = `
-        <h3>${date}</h3>
-        <p>${today >= unlockDate ? "💌 Open" : "🔒 Locked"}</p>
-      `;
+  <h3>${data[date].title}</h3>
 
+  <p>${date}</p>
+
+  <div style="font-size:55px;margin:15px 0;">
+    ${today >= unlockDate ? "💌" : "🔒"}
+  </div>
+
+  <p>
+    ${today >= unlockDate
+      ? "Click to open 💌"
+      : "Locked"}
+  </p>
+`;
       if (today >= unlockDate) {
 
         card.addEventListener("click", () => {
