@@ -123,28 +123,35 @@ const bgMusic = document.getElementById('bgMusic');
 
 let isPlaying = false;
 
-musicBtn.addEventListener('click',()=>{
+musicBtn.addEventListener('click', async () => {
 
-  if(!isPlaying){
+  try {
 
-    bgMusic.play();
+    if (!isPlaying) {
 
-    musicBtn.innerHTML='💖';
+      await bgMusic.play();
 
-    isPlaying=true;
+      musicBtn.innerHTML = '💖';
 
-  }else{
+      isPlaying = true;
 
-    bgMusic.pause();
+    } else {
 
-    musicBtn.innerHTML='🎵';
+      bgMusic.pause();
 
-    isPlaying=false;
+      musicBtn.innerHTML = '🎵';
+
+      isPlaying = false;
+
+    }
+
+  } catch(err) {
+
+    console.log("Music failed:", err);
 
   }
 
 });
-
 /* CURSOR HEART TRAIL */
 
 document.addEventListener('mousemove',(e)=>{
